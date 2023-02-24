@@ -52,7 +52,24 @@ export default function ModalComponent({
           <div className="modal_input_amount" style={{ marginTop: "3rem" }}>
             <TextField
               id="standard-number"
-              label="Unit"
+              label="Price"
+              type="number"
+              variant="standard"
+              placeholder="0"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">Currency Token</InputAdornment>
+                ),
+              }}
+              fullWidth
+              onChange={(e: any) => setPrice(e.target.value)}
+            ></TextField>
+            <TextField
+              id="standard-number"
+              label="Quantity"
               type="number"
               variant="standard"
               placeholder="0"
@@ -66,23 +83,6 @@ export default function ModalComponent({
               }}
               fullWidth
               onChange={(e: any) => setAmount(e.target.value)}
-            ></TextField>
-                        <TextField
-              id="standard-number"
-              label="Price"
-              type="number"
-              variant="standard"
-              placeholder="0"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="start">Price</InputAdornment>
-                ),
-              }}
-              fullWidth
-              onChange={(e: any) => setPrice(e.target.value)}
             ></TextField>
           </div>
           <div className="modal_tx_overview" style={{ marginTop: "3rem" }}>

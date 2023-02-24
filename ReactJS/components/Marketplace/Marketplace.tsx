@@ -16,12 +16,13 @@ import { getTNContract } from "../../utils/web3Utils";
 import ModalComponent from "./ModalComponent";
 import styles from "./Marketplace.module.css";
 
-let contractNT: ethers.Contract;
-let account: string;
 const BUY_ACTION1 = "buy from organiser"
 const BUY_ACTION2 = "buy from others"
 const SELL_ACTION = "sell"
 const FIXED_PRICE = 1
+
+let contractNT: ethers.Contract;
+let account: string;
 
 export default function Marketplace() {
   const buttonTextArray = ["Disable", "Buy"];
@@ -93,7 +94,7 @@ export default function Marketplace() {
                 Ticket price:
               </TableCell>  
               <TableCell style={{width: '15%'}}>
-                1 curency token
+                {FIXED_PRICE} curency token
               </TableCell>
             </TableRow>
             <TableRow>  
