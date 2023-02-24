@@ -17,18 +17,18 @@ const Tabs = ({ router }) => {
       <TabHead>
         <Tab selected={isTabOne}>
           <Link href={{ pathname: "/", query: { tab: "1" } }}>
-            <a>NFT</a>
+            <a>Marketplace</a>
           </Link>
         </Tab>
         <Tab selected={isTabTwo}>
           <Link href={{ pathname: "/", query: { tab: "2" } }}>
-            <a>Marketplace</a>
+            <a>NFT</a>
           </Link>
         </Tab>
       </TabHead>
       <TabBody>
-        {isTabOne && <React.Fragment><NFT/></React.Fragment>}
-        {isTabTwo && <React.Fragment><Marketplace/></React.Fragment>}
+        {isTabOne && <React.Fragment><Marketplace/></React.Fragment>}
+        {isTabTwo && <React.Fragment><NFT/></React.Fragment>}
       </TabBody>
     </TabContainer>
   )

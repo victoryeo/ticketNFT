@@ -9,12 +9,12 @@ const getContract = (abi: any, address: string, signer: ethers.providers.Provide
 }
 
 export const getCTContract = (signer: ethers.providers.Provider | ethers.Signer) => {
-  console.log("getLPContract", signer)
+  console.log("getCTContract", signer)
   return getContract(ct_abi, contracts.CURRENCY_TOKEN[5], signer)
 }
 
 export const getTNContract = (signer: ethers.providers.Provider | ethers.Signer): ethers.Contract => {
-  console.log("getWethGwContract", signer)
+  console.log("getTNContract", signer)
   return getContract(tn_abi, contracts.TICKET_NFT[5], signer)
 }
 
