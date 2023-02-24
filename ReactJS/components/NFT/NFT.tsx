@@ -15,6 +15,7 @@ import styles from "./NFT.module.css";
 import { selectSigner } from "../../redux/selectors"
 import { getTNContract } from "../../utils/web3Utils";
 
+const imgsrc = "https://gateway.pinata.cloud/ipfs/QmcxJNpGFmAfxVwh56ik8v7DFHxRHCm6m1QfZGt3wKsWuW"
 const nft_con_address = contracts.TICKET_NFT[5]
 let contractNT: ethers.Contract;
 
@@ -42,6 +43,14 @@ export default function NFT() {
       <TableContainer>
         <Table>
           <TableBody className={styles.tokenList}>
+            <TableRow>
+              <TableCell style={{width: '20%'}}>
+                NFT ticket picture
+              </TableCell>
+              <TableCell style={{width: '15%'}}>
+                <img src={imgsrc} alt="pic" width="50" />
+              </TableCell>
+            </TableRow>
             <TableRow>
               <TableCell style={{width: '20%'}}>
                 NFT contract address: 

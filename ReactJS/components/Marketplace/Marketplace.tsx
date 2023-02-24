@@ -27,8 +27,6 @@ export default function Marketplace() {
   const [buttonText, setButtonText] = useState("");
   const [NFTTotalOwn, setNFTTotalOwn] = useState<number>(0);
 
-  const imgsrc = "https://gateway.pinata.cloud/ipfs/QmcxJNpGFmAfxVwh56ik8v7DFHxRHCm6m1QfZGt3wKsWuW"
-
   useEffect(() => {
     if (account == "" || account == null) {
       setButtonText(buttonTextArray[0]);
@@ -62,18 +60,18 @@ export default function Marketplace() {
           <TableBody className={styles.tokenList}>
             <TableRow>
               <TableCell style={{width: '20%'}}>
-                NFT ticket picture
-              </TableCell>
-              <TableCell style={{width: '15%'}}>
-                <img src={imgsrc} alt="pic" width="50" />
-              </TableCell>
+                You own:
+              </TableCell> 
+              <TableCell style={{width: '20%'}}>
+                {NFTTotalOwn} ticket
+              </TableCell> 
             </TableRow>
             <TableRow>
               <TableCell style={{width: '20%'}}>
-                NFT ticket price:
+                Ticket price:
               </TableCell>  
               <TableCell style={{width: '15%'}}>
-               1 curency token
+                1 curency token
               </TableCell>
             </TableRow>
             <TableRow>  
@@ -101,9 +99,6 @@ export default function Marketplace() {
               </TableCell>
             </TableRow>
             <TableRow> 
-              <TableCell style={{width: '20%'}}>
-                You own {NFTTotalOwn} ticker 
-              </TableCell> 
               <TableCell style={{width: '20%'}}>
                 Sell to others
               </TableCell> 
