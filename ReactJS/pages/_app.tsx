@@ -7,11 +7,6 @@ import { Web3OnboardProvider, init } from '@web3-onboard/react'
 import injectedModule from '@web3-onboard/injected-wallets'
 import walletConnectModule from '@web3-onboard/walletconnect'
 import { wrapper } from "../store/store";
-import ErrorBoundary from './ErrorBoundary';
-import { setupWallets, WalletProvider } from "../components/WalletV2/WalletConnect";
-import Wallet from '../components/WalletV3/Wallet'
-
-//setupWallets();
 
 const expensiveCalculation = (num) => {
   console.log("Calculating...");
@@ -60,16 +55,8 @@ const web3Onboard = init({
 })
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const [count, setCount] = useState(0);
 
   const { store, props } = wrapper.useWrappedStore(pageProps);
-  const calculation = useMemo(() => expensiveCalculation(count), [count]);
-  // handleClick variable has always the same callback function object 
-  // between renderings of App.
-  const handleClick = useCallback((pageDetails) => {
-    console.log(pageDetails)
-    setCount(1)
-  }, [count]);
 
   return (
     <Provider store={store}>
