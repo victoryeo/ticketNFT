@@ -72,6 +72,9 @@ export default function ModalComponent({
             <Typography id="modal-modal-title" variant="caption" component="h2">
               Transaction Overview
             </Typography>
+            <Typography>
+            Ticket NFT
+            </Typography>
           </div>
           <div
             className="modal_btn"
@@ -82,7 +85,7 @@ export default function ModalComponent({
             }}
           >
             <Button disabled={amount ? false : true} onClick={()=>{callback(typeOfTransaction)}}>
-              ticket NFT
+              {typeOfTransaction} 
             </Button>
           </div>
         </Box>
