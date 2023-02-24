@@ -13,19 +13,24 @@ import {
 import { selectUserAddress } from "../../redux/selectors/user";
 import { selectSigner } from "../../redux/selectors"
 import { getTNContract } from "../../utils/web3Utils";
+import ModalComponent from "./ModalComponent";
 import styles from "./Marketplace.module.css";
 
 let contractNT: ethers.Contract;
 let account: string;
 
 export default function Marketplace() {
-  account = useSelector(selectUserAddress);
-  const signer = useSelector(selectSigner);
-  contractNT = getTNContract(signer);
-
   const buttonTextArray = ["Disable", "Buy"];
   const [buttonText, setButtonText] = useState("");
   const [NFTTotalOwn, setNFTTotalOwn] = useState<number>(0);
+  const [typeOfTransaction, setTypeOfTransaction] = useState("");
+  const [openPopup, setOpenPopup] = useState(false);
+  const handleOpenPopup = () => setOpenPopup(true);
+  const handleClosePopup = () => setOpenPopup(false);
+
+  account = useSelector(selectUserAddress);
+  const signer = useSelector(selectSigner);
+  contractNT = getTNContract(signer);
 
   useEffect(() => {
     if (account == "" || account == null) {
@@ -53,6 +58,7 @@ export default function Marketplace() {
   }, []);
 
   return(
+    <>
     <div className={styles.container}>
       <div className={styles.title}>Marketplace</div>
       <TableContainer>
@@ -80,7 +86,8 @@ export default function Marketplace() {
               </TableCell>
               <TableCell style={{width: '20%'}}>
                 <button className={buttonText==="Disable"?styles.disableButton:styles.supplyLiquidity} 
-                  onClick={()=>handleClick(`${buttonText}`)} 
+                  onClick={()=>{setTypeOfTransaction("buy from organiser");
+                    handleOpenPopup()}}
                   disabled={buttonText==="Disable"?true:false}>
                   {buttonText}
                 </button>
@@ -92,7 +99,8 @@ export default function Marketplace() {
               </TableCell> 
               <TableCell style={{width: '20%'}}>
                 <button className={buttonText==="Disable"?styles.disableButton:styles.supplyLiquidity} 
-                  onClick={()=>handleClick(`buy from others`)} 
+                  onClick={()=>{setTypeOfTransaction("buy from others");
+                    handleOpenPopup()}}
                   disabled={buttonText==="Disable"?true:false}>
                   {buttonText}
                 </button>
@@ -104,7 +112,8 @@ export default function Marketplace() {
               </TableCell> 
               <TableCell style={{width: '20%'}}>
                 <button className={buttonText==="Disable"?styles.disableButton:styles.supplyLiquidity} 
-                  onClick={()=>handleClick("sell")} 
+                  onClick={()=>{setTypeOfTransaction("sell");
+                    handleOpenPopup()}}
                   disabled={buttonText==="Disable"?true:false}>
                   Sell
                 </button>
@@ -113,7 +122,12 @@ export default function Marketplace() {
           </TableBody>
         </Table>
       </TableContainer>
-      
     </div>
+      <ModalComponent
+        open={openPopup}
+        onClose={handleClosePopup}
+        typeOfTransaction={typeOfTransaction}
+        callback={handleClick}/>
+    </>
   )
 }
