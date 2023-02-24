@@ -10,7 +10,7 @@ const PRIVATE_KEY = `${process.env.PRIVATE_KEY}`
 let provider: HDWalletProvider
 provider = new HDWalletProvider(PRIVATE_KEY, GOERLI_RPC_URL)
 
-const nftContract = require("../artifacts/contracts/ticketNFT.sol/ticketNFT.json")
+const nftContract = require("../artifacts/contracts/TicketNFT.sol/TicketNFT.json")
 // nft contract address
 const NFT_CONTRACT_ADDRESS = process.env.NFT_CONTRACT_ADDRESS
 
