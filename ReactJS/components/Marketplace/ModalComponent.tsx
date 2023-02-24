@@ -30,7 +30,7 @@ export default function ModalComponent({
   callback
 }) {
   const [amount, setAmount] = useState(0);
-
+  const [price, setPrice] = useState(0);
   const handleClose = () => {
     onClose();
     setAmount(0);
@@ -67,6 +67,23 @@ export default function ModalComponent({
               fullWidth
               onChange={(e: any) => setAmount(e.target.value)}
             ></TextField>
+                        <TextField
+              id="standard-number"
+              label="Price"
+              type="number"
+              variant="standard"
+              placeholder="0"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">Price</InputAdornment>
+                ),
+              }}
+              fullWidth
+              onChange={(e: any) => setPrice(e.target.value)}
+            ></TextField>
           </div>
           <div className="modal_tx_overview" style={{ marginTop: "3rem" }}>
             <Typography id="modal-modal-title" variant="caption" component="h2">
@@ -84,7 +101,8 @@ export default function ModalComponent({
               marginTop: "3rem",
             }}
           >
-            <Button disabled={amount ? false : true} onClick={()=>{callback(typeOfTransaction)}}>
+            <Button disabled={amount ? false : true} 
+              onClick={()=>{callback(typeOfTransaction, amount, price)}}>
               {typeOfTransaction} 
             </Button>
           </div>
