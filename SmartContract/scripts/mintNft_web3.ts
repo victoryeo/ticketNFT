@@ -20,7 +20,7 @@ let nftInst = new web3.eth.Contract(
   nftContract.abi, NFT_CONTRACT_ADDRESS
 )
 
-const NFT_SUPPLY = 9
+const NFT_SUPPLY = 1000
 
 async function mintNFT() {
   let accounts: string[] = await web3.eth.getAccounts()
