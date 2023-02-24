@@ -46,9 +46,9 @@ export default function Marketplace() {
     }
   }, [account]);
 
-  const handleClick = async (action: string, amount, price) => {
+  const handleClick = async (action: string, price, amount) => {
     //alert("action "+ action + " " + amount + " " + price)
-    console.log(price, previousSale)
+    console.log(price, previousSale, amount)
     if (action === BUY_ACTION1) {
       // buy from organiser
       alert("your order is sent to organiser")

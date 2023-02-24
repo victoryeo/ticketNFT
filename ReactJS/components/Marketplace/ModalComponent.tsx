@@ -90,7 +90,7 @@ export default function ModalComponent({
               Transaction Overview
             </Typography>
             <Typography>
-              Ticket NFT
+              Ticket NFT 
             </Typography>
           </div>
           <div
@@ -102,7 +102,7 @@ export default function ModalComponent({
             }}
           >
             <Button disabled={amount ? false : true} 
-              onClick={()=>{callback(typeOfTransaction, amount, price)}}>
+              onClick={()=>{callback(typeOfTransaction, price, amount)}}>
               {typeOfTransaction} 
             </Button>
           </div>
