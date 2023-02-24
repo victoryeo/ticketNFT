@@ -29,7 +29,19 @@ describe("NFT", function () {
       expect(await totalSupply).to.equal(1);
 
     });
+
+    it("Should own minted NFT", async function () {
+      const mintRes = await contractInst.mintNFT(owner.address);
+      // wait until the transaction is mined
+      await mintRes.wait();
+
+      const total = await contractInst.balanceOf(owner.address);
+      console.log('totalSupply', total.toString());
+      expect(await total).to.equal(1);
+    });
+
     it("transfer NFT", async function () {
+      console.log('owner', owner.address)
       const mintRes = await contractInst.mintNFT(owner.address);
       // wait until the transaction is mined
       await mintRes.wait();
@@ -40,7 +52,7 @@ describe("NFT", function () {
       await res.wait();
 
       const res2 = await contractInst.ownerOf(1);
-      console.log('owner', res2)
+      console.log('new owner', res2)
       expect(res2).to.equal(customer.address)
     });
 
