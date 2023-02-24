@@ -1,0 +1,98 @@
+.container {
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.title {
+  width: 90%;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #2e24f5;
+}
+
+.box {
+  width: 90%;
+  margin-top: 0rem;
+  border-radius: 15px;
+  padding: 0px;
+  box-shadow: 0px 0px 0px #eee;
+}
+
+.emptybox {
+  margin-top: 2rem;
+  width: 40px;
+  border-radius: 10px;
+  background-color: #ffff9e;
+  padding: 0px;
+}
+
+.aavebox {
+  margin-top: 2rem;
+  width: 800px;
+  border-radius: 15px;
+  background-color: #ffff9e;
+  padding: 20px;
+  box-shadow: 0px 0px 10px #000;
+}
+
+.aave {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 1rem;
+}
+
+.token {
+  padding: 22px 22px;
+  font-size: 20px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.aavespan {
+  margin: 1rem 1rem;
+  display:inline-block;
+}
+
+.aaveblock {
+  justify-content: space-between;
+  margin: 1.5rem 1.5rem;
+  display: block;
+}
+
+.supplyLiquidity {
+  border-radius: 8px;
+  background-color: #d60f5f;
+  border: 'none';
+  font-size: 1.4rem;
+  cursor: alias;
+  color: white;
+  padding: 6px 10px;
+  margin-top: 0px;
+  margin-left: 0px;
+  font-family: arial;
+}
+
+.disableButton {
+  border-radius: 8px;
+  background-color: #000000;
+  border: 'none';
+  font-size: 1.4rem;
+  cursor: alias;
+  color: white;
+  padding: 6px 10px;
+  margin-top: 0px;
+  margin-left: 0px;
+  font-family: arial;
+}
+
+.tokenHeader {
+  justify-content: space-between;
+  font-size: 1rem;
+  font-family: arial;
+}
+
+.tokenList {
+
+  justify-content: space-between;
+  font-size: 1.1rem;
+}
