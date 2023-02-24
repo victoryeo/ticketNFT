@@ -15,10 +15,10 @@ import styles from "./NFT.module.css";
 import { selectSigner } from "../../redux/selectors"
 import { getTNContract } from "../../utils/web3Utils";
 
+const nft_con_address = contracts.TICKET_NFT[5]
 let contractNT: ethers.Contract;
 
 export default function NFT() {
-  const nft_con_address = contracts.TICKET_NFT[5]
   const [NFTTotalSupply, setNFTTotalSupply] = useState<number>(0);
   const signer = useSelector(selectSigner);
   contractNT = getTNContract(signer);
