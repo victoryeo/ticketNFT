@@ -7,8 +7,9 @@ Please see:
 https://github.com/victoryeo/ticketNFT/blob/master/SmartContract/README.md
 
 #### to build the ReactJS webapp docker image, cd to ReactJS folder, and run
-docker build -f Dockerfile  -t server .  
-docker run -it -p 3000:3000 server  
+docker login
+docker build -f Dockerfile  -t <docker_username>/server:latest .  
+docker push <docker_username>/server:latest  
 
 #### to run dockerised webapp, cd to root folder, and run
-docker-compose up --build  
+docker-compose up  
