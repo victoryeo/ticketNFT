@@ -90,7 +90,7 @@ export default function ModalComponent({
               Transaction Overview
             </Typography>
             <Typography>
-            Ticket NFT
+              Ticket NFT
             </Typography>
           </div>
           <div
