@@ -12,7 +12,6 @@ const func: DeployFunction = async function ({
 
     args[0] = "T_NAME"
     args[1] = "T_SYMBOL"
-    args[2] = 2
     await deploy("CurrencyToken", {
         from: deployer,
         args: args,

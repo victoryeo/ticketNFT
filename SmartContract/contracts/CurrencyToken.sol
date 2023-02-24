@@ -7,31 +7,27 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "hardhat/console.sol";
 
 contract CurrencyToken is Ownable, ERC20 {
-    uint8 _decimals;
 
     constructor(
         string memory name,
-        string memory symbol,
-        uint8 __decimals
-    ) ERC20(name, symbol) {
-      _decimals = __decimals;
-    }
+        string memory symbol
+    ) ERC20(name, symbol) {}
 
-    function decimals() public view virtual override returns (uint8) {
-        return _decimals;
+    function totalSupplyCurrency() public view returns (uint256) {
+        return totalSupply();
     }
 
     function mint(
       address account, 
       uint256 amount
-    ) public virtual onlyOwner returns (bool success) {
-        _mint(account, amount * (10 ** (_decimals)));
+    ) public onlyOwner returns (bool success) {
+        _mint(account, amount);
 
         // after minting, add the allowance
         _approve(
             account,
             msg.sender,
-            amount * (10 ** (_decimals))
+            amount 
         );
 
         return true;
@@ -43,7 +39,7 @@ contract CurrencyToken is Ownable, ERC20 {
     ) public override returns (bool success) {
         console.log("transfer");
         console.log(msg.sender);
-        _transfer(msg.sender, recipient, amount * (10 ** (_decimals)));
+        _transfer(msg.sender, recipient, amount );
         return true;
     }
 
@@ -58,13 +54,13 @@ contract CurrencyToken is Ownable, ERC20 {
         uint256 currentAllowance = allowance(sender, msg.sender);
         console.log(currentAllowance);
 
-        _transfer(sender, recipient, amount * (10 ** (_decimals)));
+        _transfer(sender, recipient, amount );
 
         // after transfer, reduce the allowance
         _approve(
             sender,
             msg.sender,
-            currentAllowance - amount * (10 ** (_decimals))
+            currentAllowance - amount 
         );
 
         currentAllowance = allowance(sender, msg.sender);
