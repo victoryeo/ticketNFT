@@ -18,7 +18,7 @@ contract TicketNFT is ERC721URIStorage, ERC2981, Ownable {
     }
 
     modifier lessThan1000 {
-        require(_tokenIds.current() < 1000, "already 1000 tickets exist");
+        require(_tokenIds.current() <= 1000, "already 1000 tickets exist");
         _;
     }
 
