@@ -53,12 +53,13 @@ export default function Marketplace() {
     console.log(price, previousSale, amount)
     if (action === BUY_ACTION1) {
       // buy from organiser
-      alert("Your order is sent to organiser")
+      alert("Your order is sent to the organiser")
       try {
         // check currency token total supply
         const totalSupplyCT = await contractCT.totalSupplyCurrency()
         console.log(totalSupplyCT)
         // get NFT token owner
+        // token id is hardcoded to 1, for demo
         const addressOwner = await contractTN.ownerOf(1)
         console.log(addressOwner)
         // send currency token from buyer to seller
@@ -68,6 +69,8 @@ export default function Marketplace() {
         const res2 = await contractTN.safeTransferFromNFT(addressOwner, account, 1)
         console.log(res2)
         alert("Success, you can close the dialog box")
+        // this transaction price is updated to previous sale price
+        setPreviousSale(price)
       } catch (e) {
         console.log(e)
       }
