@@ -48,10 +48,11 @@ async function mintNFT() {
     // accounts[0] is organiser wallet
     const callsData: CallContext[] = [];
     for (let i = 1; i <= NFT_SUPPLY; i++) {
-      callsData.push({
+      // multicall of smart contracts, for view methods only
+      /*callsData.push({
         reference: String(i),
-        methodName: 'mintNFT',
-        methodParameters: [accounts[0]],
+        methodName: 'ownerOf',
+        methodParameters: [i],
       });
       if (
         i % NFT_PER_BATCH === 0 ||
@@ -67,10 +68,11 @@ async function mintNFT() {
         console.log(JSON.stringify(results))
         //console.log(callsData.length)
         //console.log(callsData.splice(0, callsData.length))
-      }
+      }*/
+
       // original way of minting NFT
-      //const data0 = await nftInst.methods.mintNFT(accounts[0]).send({from: accounts[0]})
-      //console.log(data0);
+      const data0 = await nftInst.methods.mintNFT(accounts[0]).send({from: accounts[0]})
+      console.log(data0);
     }
 
     // show NFT number
