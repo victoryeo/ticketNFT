@@ -1,6 +1,12 @@
 import Web3 from 'web3'
 import HDWalletProvider from '@truffle/hdwallet-provider'
 import * as dotenv from "dotenv"
+import {
+  Multicall,
+  ContractCallResults,
+  ContractCallContext,
+} from 'ethereum-multicall';
+import { CallContext } from 'ethereum-multicall/dist/esm/models';
 
 dotenv.config()
 
@@ -13,6 +19,7 @@ provider = new HDWalletProvider(PRIVATE_KEY, GOERLI_RPC_URL)
 const nftContract = require("../artifacts/contracts/TicketNFT.sol/TicketNFT.json")
 // nft contract address
 const NFT_CONTRACT_ADDRESS = process.env.NFT_CONTRACT_ADDRESS
+console.log("nft contract ",NFT_CONTRACT_ADDRESS)
 
 const web3 = new Web3(provider)
 
@@ -20,7 +27,10 @@ let nftInst = new web3.eth.Contract(
   nftContract.abi, NFT_CONTRACT_ADDRESS
 )
 
-const NFT_SUPPLY = 1000
+const NFT_SUPPLY: number = 3
+const NFT_PER_BATCH: number = 100;
+
+const multicall = new Multicall({ web3Instance: web3, tryAggregate: true });
 
 async function mintNFT() {
   let accounts: string[] = await web3.eth.getAccounts()
@@ -36,10 +46,31 @@ async function mintNFT() {
 
     // mint NFT to organiser 
     // accounts[0] is organiser wallet
-    for (let i = 0; i < NFT_SUPPLY; i++) {
-      const data0 = await nftInst.methods.mintNFT(accounts[0])
-      .send({from: accounts[0]})
-      console.log(data0);
+    const callsData: CallContext[] = [];
+    for (let i = 1; i <= NFT_SUPPLY; i++) {
+      callsData.push({
+        reference: String(i),
+        methodName: 'mintNFT',
+        methodParameters: [accounts[0]],
+      });
+      if (
+        i % NFT_PER_BATCH === 0 ||
+        (i === NFT_SUPPLY && callsData.length > 0)
+      )  {
+        const results: ContractCallResults = await multicall.call({
+          reference: 'mint',
+          contractAddress: NFT_CONTRACT_ADDRESS!,
+          abi: nftContract.abi,
+          //from 0 to callsData.length of methods per multicall
+          calls: callsData.splice(0, callsData.length),
+        });
+        console.log(JSON.stringify(results))
+        //console.log(callsData.length)
+        //console.log(callsData.splice(0, callsData.length))
+      }
+      // original way of minting NFT
+      //const data0 = await nftInst.methods.mintNFT(accounts[0]).send({from: accounts[0]})
+      //console.log(data0);
     }
 
     // show NFT number
