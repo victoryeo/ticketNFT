@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { selectUserAddress } from "../../redux/selectors/user";
 import { selectSigner } from "../../redux/selectors"
-import { getTNContract } from "../../utils/web3Utils";
+import { getTNContract, getCTContract } from "../../utils/web3Utils";
 import ModalComponent from "./ModalComponent";
 import styles from "./Marketplace.module.css";
 
@@ -22,6 +22,7 @@ const SELL_ACTION = "sell"
 const FIXED_PRICE = 1
 
 let contractNT: ethers.Contract;
+let contractCT: ethers.Contract;
 let account: string;
 
 export default function Marketplace() {
@@ -37,6 +38,7 @@ export default function Marketplace() {
   account = useSelector(selectUserAddress);
   const signer = useSelector(selectSigner);
   contractNT = getTNContract(signer);
+  contractCT = getCTContract(signer);
 
   useEffect(() => {
     if (account == "" || account == null) {
@@ -52,10 +54,13 @@ export default function Marketplace() {
     if (action === BUY_ACTION1) {
       // buy from organiser
       alert("your order is sent to organiser")
+      // send currency token from buyer to seller
+      const totalSupplyCT = await contractCT.totalSupplyCurrency()
+      console.log(totalSupplyCT)
     } else if (action === BUY_ACTION2 || action === SELL_ACTION) {
       // buy from others
       if (price <= previousSale*1.1) {
-        alert("your order is sent to market")
+        alert("your order is sent to secondary market")
       } else {
         alert("order price cannot be higher than 110% of previous sale")
       }
