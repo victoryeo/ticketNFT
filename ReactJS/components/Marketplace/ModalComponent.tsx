@@ -9,8 +9,9 @@ import {
   LinearProgress
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import styles from "./Marketplace.module.css";
 
-const style = {
+const boxstyle = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
@@ -21,7 +22,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-import styles from "./Marketplace.module.css";
 
 export default function ModalComponent({
   open,
@@ -43,9 +43,10 @@ export default function ModalComponent({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={boxstyle}>
           <div className={styles.modal_header}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
+              {typeOfTransaction}
             </Typography>
             <CloseIcon onClick={handleClose} style={{ cursor: "pointer" }} />
           </div>
@@ -94,7 +95,7 @@ export default function ModalComponent({
             </Typography>
           </div>
           <div
-            className="modal_btn"
+            className={styles.modal_btn}
             style={{
               display: "flex",
               justifyContent: "center",
