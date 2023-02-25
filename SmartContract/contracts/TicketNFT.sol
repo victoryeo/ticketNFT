@@ -11,6 +11,7 @@ contract TicketNFT is ERC721URIStorage, ERC2981, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
     string ticketURI = "https://ipfs.io/ipfs/QmcxJNpGFmAfxVwh56ik8v7DFHxRHCm6m1QfZGt3wKsWuW";
+    uint constant NFT_SUPPLY = 1000;
 
     constructor() ERC721("ticketNFT", "NFT") {
         //set the default recipient to be the owner of the contract and the fee to be 1%
@@ -18,7 +19,7 @@ contract TicketNFT is ERC721URIStorage, ERC2981, Ownable {
     }
 
     modifier lessThan1000 {
-        require(_tokenIds.current() <= 1000, "already 1000 tickets exist");
+        require(_tokenIds.current() <= NFT_SUPPLY, "already 1000 tickets exist");
         _;
     }
 
@@ -47,6 +48,19 @@ contract TicketNFT is ERC721URIStorage, ERC2981, Ownable {
         _mint(recipient, newItemId);
         _setTokenURI(newItemId, ticketURI);
 
+        return newItemId;
+    }
+
+    function batchMintNFT(address recipient, uint numberToMint)
+        public onlyOwner lessThan1000 returns (uint256)
+    {
+        uint256 newItemId;
+        for(uint i = 0; i < numberToMint; i++) {
+            _tokenIds.increment();
+            newItemId = _tokenIds.current();
+            _mint(recipient, newItemId);
+            _setTokenURI(newItemId, ticketURI);
+        }
         return newItemId;
     }
 

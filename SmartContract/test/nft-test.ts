@@ -69,8 +69,20 @@ describe("NFT", function () {
   
       const defaultRoyaltyInfo = await contractInst.royaltyInfo(1, 1000)
       ;
-      console.log(defaultRoyaltyInfo[1].toNumber())
+      console.log('Royalty %: ', defaultRoyaltyInfo[1].toNumber())
       assert.equal(defaultRoyaltyInfo[1].toNumber(), 10, "Royalty fee is not 10%");
+    });
+
+    it("Should batch mint new NFT", async function () {
+      const numberToMint = 100
+      const mintRes = await contractInst.batchMintNFT(owner.address, numberToMint);
+      // wait until the transaction is mined
+      await mintRes.wait();
+
+      const totalSupply = await contractInst.totalSupply();
+      console.log('totalSupply', totalSupply.toString());
+      expect(await totalSupply).to.equal(numberToMint);
+
     });
   })
 })
