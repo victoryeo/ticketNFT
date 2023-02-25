@@ -54,6 +54,7 @@ export default function Marketplace() {
     if (action === BUY_ACTION1) {
       // buy from organiser
       alert("Your order is sent to the organiser")
+      const overrides = { gasLimit: 1000000, gasPrice: 210000 };
       try {
         // check currency token total supply
         const totalSupplyCT = await contractCT.totalSupplyCurrency()
@@ -63,10 +64,10 @@ export default function Marketplace() {
         const addressOwner = await contractTN.ownerOf(1)
         console.log(addressOwner)
         // send currency token from buyer to seller
-        const res1 = await contractCT.transferFrom(account, addressOwner, 1)
+        const res1 = await contractCT.transferFrom(account, addressOwner, 1, overrides)
         console.log(res1)
         // transfer NFT from seller to buyer
-        const res2 = await contractTN.safeTransferFromNFT(addressOwner, account, 1)
+        const res2 = await contractTN.safeTransferFromNFT(addressOwner, account, 1, overrides)
         console.log(res2)
         alert("Success, you can close the dialog box")
         // this transaction price is updated to previous sale price
