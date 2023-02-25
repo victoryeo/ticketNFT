@@ -21,7 +21,7 @@ const BUY_ACTION2 = "buy from others"
 const SELL_ACTION = "sell"
 const FIXED_PRICE = 1
 
-let contractNT: ethers.Contract;
+let contractTN: ethers.Contract;
 let contractCT: ethers.Contract;
 let account: string;
 
@@ -37,7 +37,7 @@ export default function Marketplace() {
 
   account = useSelector(selectUserAddress);
   const signer = useSelector(selectSigner);
-  contractNT = getTNContract(signer);
+  contractTN = getTNContract(signer);
   contractCT = getCTContract(signer);
 
   useEffect(() => {
@@ -53,16 +53,30 @@ export default function Marketplace() {
     console.log(price, previousSale, amount)
     if (action === BUY_ACTION1) {
       // buy from organiser
-      alert("your order is sent to organiser")
-      // send currency token from buyer to seller
-      const totalSupplyCT = await contractCT.totalSupplyCurrency()
-      console.log(totalSupplyCT)
+      alert("Your order is sent to organiser")
+      try {
+        // check currency token total supply
+        const totalSupplyCT = await contractCT.totalSupplyCurrency()
+        console.log(totalSupplyCT)
+        // get NFT token owner
+        const addressOwner = await contractTN.ownerOf(1)
+        console.log(addressOwner)
+        // send currency token from buyer to seller
+        const res1 = await contractCT.transferFrom(account, addressOwner, 1)
+        console.log(res1)
+        // transfer NFT from seller to buyer
+        const res2 = await contractTN.safeTransferFromNFT(addressOwner, account, 1)
+        console.log(res2)
+        alert("Success, you can close the dialog box")
+      } catch (e) {
+        console.log(e)
+      }
     } else if (action === BUY_ACTION2 || action === SELL_ACTION) {
       // buy from others
       if (price <= previousSale*1.1) {
-        alert("your order is sent to secondary market")
+        alert("Your order is sent to secondary market")
       } else {
-        alert("order price cannot be higher than 110% of previous sale")
+        alert("Order price cannot be higher than 110% of previous sale")
       }
     }
   }
@@ -70,7 +84,7 @@ export default function Marketplace() {
   useEffect(() => {
     const fetchContractAsset = async() => {
       try {
-        let data = await contractNT.balanceOf(account)
+        let data = await contractTN.balanceOf(account)
         console.log('data',data)
         setNFTTotalOwn(parseInt(data.toString(),10))
       } catch (e) {
