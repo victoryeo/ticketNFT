@@ -64,7 +64,9 @@ describe("NFT", function () {
      
       // Override royalty for this token to be 10% and 
       // paid to a different account
-      const mintRes1 = await contractInst.mintNFTWithRoyalty(owner.address, customer.address, 1000);
+      // NFT is minted to customer, and 
+      // owner will receive the 10% royalty
+      const mintRes1 = await contractInst.mintNFTWithRoyalty(customer.address, owner.address, 1000);
       await mintRes1.wait();
   
       const defaultRoyaltyInfo = await contractInst.royaltyInfo(1, 1000)
