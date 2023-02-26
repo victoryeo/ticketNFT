@@ -29,11 +29,11 @@ export default function ModalComponent({
   typeOfTransaction,
   callback
 }) {
-  const [amount, setAmount] = useState(0);
+  const [tokenID, setTokenID] = useState(0);
   const [price, setPrice] = useState(0);
   const handleClose = () => {
     onClose();
-    setAmount(0);
+    setTokenID(0);
   };
   return (
     <>
@@ -70,7 +70,7 @@ export default function ModalComponent({
             ></TextField>
             <TextField
               id="standard-number"
-              label="Quantity"
+              label="tokenID"
               type="number"
               variant="standard"
               placeholder="0"
@@ -83,7 +83,7 @@ export default function ModalComponent({
                 ),
               }}
               fullWidth
-              onChange={(e: any) => setAmount(e.target.value)}
+              onChange={(e: any) => setTokenID(e.target.value)}
             ></TextField>
           </div>
           <div className="modal_tx_overview" style={{ marginTop: "3rem" }}>
@@ -102,8 +102,8 @@ export default function ModalComponent({
               marginTop: "3rem",
             }}
           >
-            <Button disabled={amount ? false : true} 
-              onClick={()=>{callback(typeOfTransaction, price, amount)}}>
+            <Button disabled={tokenID ? false : true} 
+              onClick={()=>{callback(typeOfTransaction, price, tokenID)}}>
               {typeOfTransaction} 
             </Button>
           </div>

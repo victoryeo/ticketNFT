@@ -48,9 +48,9 @@ export default function Marketplace() {
     }
   }, [account]);
 
-  const handleClick = async (action: string, price, amount) => {
-    //alert("action "+ action + " " + amount + " " + price)
-    console.log(price, previousSale, amount)
+  const handleClick = async (action: string, price, tokenID) => {
+    //alert("action "+ action + " " + tokenID + " " + price)
+    console.log(price, previousSale, tokenID)
     if (action === BUY_ACTION1) {
       // buy from organiser
       alert("Your order is sent to the organiser")
@@ -60,8 +60,8 @@ export default function Marketplace() {
         const totalSupplyCT = await contractCT.totalSupplyCurrency()
         console.log(totalSupplyCT)
         // get NFT token owner
-        // token id is hardcoded to 1, for demo
-        const addressOwner = await contractTN.ownerOf(1)
+        // token id is from tokenID
+        const addressOwner = await contractTN.ownerOf(tokenID)
         console.log(addressOwner)
         // approve currency token spending, for 1 gwei
         const res0 = await contractCT.approve(account, 1000000000)
@@ -70,7 +70,7 @@ export default function Marketplace() {
         const res1 = await contractCT.transferFrom(account, addressOwner, 1, overrides)
         console.log(res1)
         // transfer NFT from seller to buyer
-        const res2 = await contractTN.safeTransferFromNFT(addressOwner, account, 1, overrides)
+        const res2 = await contractTN.safeTransferFromNFT(addressOwner, account, tokenID, overrides)
         console.log(res2)
         alert("Success, you can close the dialog box")
         // this transaction price is updated to previous sale price
