@@ -62,7 +62,11 @@ export default function Marketplace() {
         // get NFT token owner
         // token id is from tokenID
         const addressOwner = await contractTN.ownerOf(tokenID)
-        console.log(addressOwner)
+        // check if NFT is already owned by account address
+        if (addressOwner.toLowerCase() === account) {
+          alert("You already own the NFT of tokenID " + tokenID)
+          throw new Error("NFT is already owned")
+        }
         // approve currency token spending, for 1 gwei
         const res0 = await contractCT.approve(account, 1000000000)
         console.log(res0)
