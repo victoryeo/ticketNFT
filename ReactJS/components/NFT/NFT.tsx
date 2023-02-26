@@ -14,20 +14,23 @@ import contracts from "../../config/constants/contracts";
 import styles from "./NFT.module.css";
 import { selectSigner } from "../../redux/selectors"
 import { getTNContract } from "../../utils/web3Utils";
+import { selectUserAddress } from "../../redux/selectors/user";
 
 const imgsrc = "https://gateway.pinata.cloud/ipfs/QmcxJNpGFmAfxVwh56ik8v7DFHxRHCm6m1QfZGt3wKsWuW"
 const nft_con_address = contracts.TICKET_NFT[5]
-let contractNT: ethers.Contract;
+let contractTN: ethers.Contract;
+let account: string;
 
 export default function NFT() {
   const [NFTTotalSupply, setNFTTotalSupply] = useState<number>(0);
   const signer = useSelector(selectSigner);
-  contractNT = getTNContract(signer);
+  contractTN = getTNContract(signer);
+  account = useSelector(selectUserAddress);
 
   useEffect(() => {
     const fetchContractAsset = async() => {
       try {
-        let data = await contractNT.totalSupply()
+        let data = await contractTN.totalSupply()
         console.log('data',data)
         setNFTTotalSupply(parseInt(data.toString(),10))
       } catch (e) {
