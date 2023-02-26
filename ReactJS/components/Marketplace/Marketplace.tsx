@@ -63,7 +63,10 @@ export default function Marketplace() {
         // token id is hardcoded to 1, for demo
         const addressOwner = await contractTN.ownerOf(1)
         console.log(addressOwner)
-        // send currency token from buyer to seller
+        // approve currency token spending, for 1 gwei
+        const res0 = await contractCT.approve(account, 1000000000)
+        console.log(res0)
+        // send currency token from buyer to seller, for 1 wei
         const res1 = await contractCT.transferFrom(account, addressOwner, 1, overrides)
         console.log(res1)
         // transfer NFT from seller to buyer
