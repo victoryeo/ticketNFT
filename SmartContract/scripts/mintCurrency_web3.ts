@@ -42,9 +42,13 @@ async function mintCurrency() {
       .send({from: accounts[0]})
     console.log(data0);
 
-    const data1 = await currInst.methods.mint(accounts[1], CURRENCY_SUPPLY)
-      .send({from: accounts[0]})
-    console.log(data1);
+    if (accounts[1] != undefined) {
+      const data1 = await currInst.methods.mint(accounts[1], CURRENCY_SUPPLY)
+        .send({from: accounts[0]})
+      console.log(data1);
+    } else {
+      console.log("accounts[1] is undefined")
+    }
     
     // show total supply 
     const data2 = await currInst.methods.totalSupply().call()
