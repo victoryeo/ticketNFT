@@ -1,12 +1,12 @@
 import Web3 from 'web3'
 import HDWalletProvider from '@truffle/hdwallet-provider'
 import * as dotenv from "dotenv"
-import {
+/*import {
   Multicall,
   ContractCallResults,
   ContractCallContext,
 } from 'ethereum-multicall';
-import { CallContext } from 'ethereum-multicall/dist/esm/models';
+import { CallContext } from 'ethereum-multicall/dist/esm/models';*/
 
 dotenv.config()
 
@@ -30,7 +30,7 @@ let nftInst = new web3.eth.Contract(
 const NFT_SUPPLY: number = 1000
 const NFT_PER_BATCH: number = 100
 
-const multicall = new Multicall({ web3Instance: web3, tryAggregate: true })
+//const multicall = new Multicall({ web3Instance: web3, tryAggregate: true })
 
 async function mintNFT() {
   let accounts: string[] = await web3.eth.getAccounts()
@@ -46,13 +46,16 @@ async function mintNFT() {
 
     // mint NFT to organiser 
     // accounts[0] is organiser wallet
-    const callsData: CallContext[] = []
+
+    //const callsData: CallContext[] = []
+    
     for (let i = 1; i <= NFT_SUPPLY; i++) {
       // multicall of smart contracts, for view methods only
+      // multicall does not support set funtions
       /*callsData.push({
         reference: String(i),
-        methodName: 'ownerOf',
-        methodParameters: [i],
+        methodName: 'mintNFT',
+        methodParameters: [accounts[0]],
       })
       if (
         i % NFT_PER_BATCH === 0 ||
