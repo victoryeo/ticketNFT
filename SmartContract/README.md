@@ -9,7 +9,7 @@ update contract address (both nft and currency contract) in .env, and run:
 npx hardhat run scripts/mintNft_web3.ts  
 npx hardhat run scripts/mintCurrency_web3.ts  
 
-## approve NFT for sale
+## approve NFT for sale (required by ERC721)
 npx hardhat run scripts/approveNft_web3.ts
 
 ## unit test
