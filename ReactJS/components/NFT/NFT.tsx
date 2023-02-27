@@ -91,7 +91,7 @@ export default function NFT() {
             console.log(owned)
           }
         }
-        const newState = owned.map((item) => {
+        const newState = owned.filter((item) => {
           if (item !== undefined) {
             return item
           }
