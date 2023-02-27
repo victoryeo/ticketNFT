@@ -107,9 +107,9 @@ export default function NFT() {
   }, [NFTTotalSupply])
 
   const nftItems = NFTOwned.map((item, index)=> 
-    <TableCell style={{width: '1%'}} key={index}>
+    <TableRow style={{width: '1%'}} key={index}>
       {item}
-    </TableCell>
+    </TableRow>
   )
 
   return(
@@ -143,12 +143,14 @@ export default function NFT() {
               </TableCell>  
             </TableRow>
             <TableRow>
-              <TableCell style={{width: '30%'}}>
+              <TableCell style={{width: '20%'}}>
                 NFT owned by you <br/>
-                (sorted by TokenID):
               </TableCell>
-              {nftItems}
+              <TableCell style={{width: '15%'}}>
+                (sorted by TokenID):
+                </TableCell>
             </TableRow>
+            {nftItems}
           </TableBody>
         </Table>
       </TableContainer>
