@@ -18,6 +18,7 @@
     "@web3-onboard/walletconnect": "^2.2.2",
     "bnc-notify": "^1.9.8",
     "bnc-onboard": "^1.39.1",
+    "ethereum-multicall": "^2.15.0",
     "next": "^12.2.2",
     "next-redux-wrapper": "^8.1.0",
     "qs": "^6.11.0",
