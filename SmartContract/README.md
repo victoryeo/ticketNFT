@@ -1,6 +1,6 @@
-## compile
+## compile smart contract
 npx hardhat compile
-## deploy to goerli testnet
+## deploy smart contract to goerli testnet
 npx hardhat deploy --network goerli
 
 ## mint NFT and currency token
