@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { ethers } from "ethers";
 import {
   TableContainer,
@@ -18,10 +18,10 @@ import { CallContext } from "ethereum-multicall/dist/esm/models";
 import { useSelector } from "react-redux";
 import contracts from "../../config/constants/contracts";
 import { tn_abi } from '../../config/abi/TicketNFT'
-import styles from "./NFT.module.css";
 import { selectSigner } from "../../redux/selectors"
 import { getTNContract } from "../../utils/web3Utils";
 import { selectUserAddress } from "../../redux/selectors/user";
+import styles from "./NFT.module.css";
 
 const NFT_PER_BATCH = 100
 
@@ -54,7 +54,7 @@ export default function NFT() {
     fetchContractAsset()
   }, []);
 
-  useEffect(() => {
+  useMemo(() => {
     const fetchNftAsset = async() => {
       const callsData: CallContext[] = []
       try {
