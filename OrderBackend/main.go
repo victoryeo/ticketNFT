@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/victoryeo/ticketNFT/controllers"
 )
 
 func getRoot(context *gin.Context) {
@@ -26,6 +27,7 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*")
 	router.GET("/", getRoot)
+	router.POST("/order", controllers.CreateOrder)
 
 	router.Run("localhost:9090")
 }
