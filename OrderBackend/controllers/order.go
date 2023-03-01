@@ -14,6 +14,7 @@ func CreateOrder(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	order := models.Order{TokenID: input.TokenID, Price: input.Price}
+	order := models.Order{Type: input.Type,
+		TokenID: input.TokenID, Price: input.Price}
 	c.JSON(http.StatusOK, gin.H{"data": order})
 }
