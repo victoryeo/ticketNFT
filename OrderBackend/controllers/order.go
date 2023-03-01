@@ -16,5 +16,8 @@ func CreateOrder(c *gin.Context) {
 	}
 	order := models.Order{Type: input.Type,
 		TokenID: input.TokenID, Price: input.Price}
+
+	// TODO: order matching
+
 	c.JSON(http.StatusOK, gin.H{"data": order})
 }
