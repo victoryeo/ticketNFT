@@ -91,10 +91,11 @@ export default function Marketplace() {
           tokenID: tokenID,
           price: price
         }
-        const res = await fetch("http://localhost:9090/order/", {
+        const res = await fetch("http://localhost:9091/order/", {
           method: 'POST',
+          mode: 'no-cors',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify(opts)
         })
