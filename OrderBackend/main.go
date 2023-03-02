@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/victoryeo/ticketNFT/controllers"
 )
@@ -28,6 +30,15 @@ func main() {
 	router.LoadHTMLGlob("templates/*")
 	router.GET("/", getRoot)
 	router.POST("/order", controllers.CreateOrder)
+
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"https://0.0.0.0"},
+		AllowMethods:     []string{"POST"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
 
 	router.Run("0.0.0.0:9090")
 }
