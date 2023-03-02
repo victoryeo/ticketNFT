@@ -87,7 +87,7 @@ export default function Marketplace() {
       if (price <= previousSale*1.1) {
         alert("Your order is sent to secondary market")
         let opts = {
-          type: BUY_ACTION2,
+          type: action,
           tokenID: tokenID,
           price: price
         }
