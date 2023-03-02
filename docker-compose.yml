@@ -13,4 +13,4 @@ services:
     restart: always
     image: victoryeo00/order_backend:latest
     ports:
-      - "9091:9090"
+      - "9090:9090"
