@@ -17,8 +17,8 @@ import ModalComponent from "./ModalComponent";
 import styles from "./Marketplace.module.css";
 
 const BUY_ACTION1 = "buy from organiser"
-const BUY_ACTION2 = "buy from others"
-const SELL_ACTION = "sell"
+const BUY_ACTION2 = "buy"  //buy from others
+const SELL_ACTION = "sell" //sell to others
 const FIXED_PRICE = 1
 
 let contractTN: ethers.Contract;
@@ -86,6 +86,19 @@ export default function Marketplace() {
       // buy from others
       if (price <= previousSale*1.1) {
         alert("Your order is sent to secondary market")
+        let opts = {
+          type: BUY_ACTION2,
+          tokenID: tokenID,
+          price: price
+        }
+        const res = await fetch("http://localhost:9090/order/", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(opts)
+        })
+        console.log(res)
       } else {
         alert("Order price cannot be higher than 110% of previous sale")
       }
