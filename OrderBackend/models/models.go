@@ -1,6 +1,9 @@
 package models
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
 type Order struct {
 	ID      uint   `json:"id" gorm:"primary_key"`
@@ -21,6 +24,19 @@ type OrderBook struct {
 	SellOrders []Order
 }
 
+const ORDERBOOK_LEN = 1000
+
+var Book OrderBook
+
+func InitOrder() {
+	// create the order book
+	Book = OrderBook{
+		BuyOrders:  make([]Order, 0, ORDERBOOK_LEN),
+		SellOrders: make([]Order, 0, ORDERBOOK_LEN),
+	}
+	log.Printf("%v\n", Book)
+}
+
 // Process an order and return the order matched(if any)
 func Process(order Order) Order {
 	var matchOrder Order
@@ -38,6 +54,7 @@ func Process(order Order) Order {
 
 func processLimitBuy(order Order) Order {
 	//TODO: add processing logic
+
 	return order
 }
 

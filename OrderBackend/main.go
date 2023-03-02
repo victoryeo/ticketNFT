@@ -8,6 +8,7 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/victoryeo/ticketNFT/controllers"
+	"github.com/victoryeo/ticketNFT/models"
 )
 
 func getRoot(context *gin.Context) {
@@ -25,6 +26,7 @@ func getRoot(context *gin.Context) {
 
 func main() {
 	fmt.Print("Order Backend ", "started.\n")
+	models.InitOrder()
 
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*")
