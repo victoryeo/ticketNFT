@@ -54,11 +54,44 @@ func Process(order Order) Order {
 
 func processLimitBuy(order Order) Order {
 	//TODO: add processing logic
-
+	n := len(Book.SellOrders)
+	if n >= 1 {
+		for i := n - 1; i >= 0; i-- {
+			sellOrder := Book.SellOrders[i]
+			if sellOrder.TokenID == order.TokenID {
+				if sellOrder.Price <= order.Price {
+					fmt.Println("order is matched")
+					return sellOrder
+				}
+			}
+		}
+	}
+	addBuyOrder(order)
 	return order
 }
 
 func processLimitSell(order Order) Order {
 	//TODO: add processing logic
+	n := len(Book.BuyOrders)
+	if n >= 1 {
+		for i := n - 1; i >= 0; i-- {
+			buyOrder := Book.BuyOrders[i]
+			if buyOrder.TokenID == order.TokenID {
+				if buyOrder.Price >= order.Price {
+					fmt.Println("order is matched")
+					return buyOrder
+				}
+			}
+		}
+	}
+	addSellOrder(order)
 	return order
+}
+
+func addBuyOrder(order Order) {
+	Book.BuyOrders = append(Book.BuyOrders, order)
+}
+
+func addSellOrder(order Order) {
+	Book.SellOrders = append(Book.SellOrders, order)
 }
