@@ -8,3 +8,9 @@ services:
       - "3000:3000"
     volumes:
       - ./ReactJS:/app
+  orders:
+    container_name: orders_backend
+    restart: always
+    image: victoryeo00/order_backend:latest
+    ports:
+      - "9090:9090"
