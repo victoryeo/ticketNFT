@@ -11,5 +11,9 @@ docker login
 docker build -f Dockerfile  -t <docker_username>/server:latest .  
 docker push <docker_username>/server:latest  
 
+#### for order backend, cd to OrderBackend folder
+docker build -f Dockerfile  -t <docker_username>/order_backend:latest .  
+docker push <docker_username>/order_backend:latest  
+
 #### to run dockerised webapp, cd to root folder, and run
 docker-compose up  
