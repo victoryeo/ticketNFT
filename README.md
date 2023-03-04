@@ -1,3 +1,5 @@
+This is a project on using NFT to represent tickets.
+
 The ReactJS folder contains the web app.
 Please see:
 https://github.com/victoryeo/ticketNFT/blob/master/ReactJS/README.md
