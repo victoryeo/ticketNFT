@@ -26,15 +26,15 @@ type OrderBook struct {
 
 const ORDERBOOK_LEN = 1000
 
-var Book OrderBook
+var book OrderBook
 
 func InitOrder() {
 	// create the order book
-	Book = OrderBook{
+	book = OrderBook{
 		BuyOrders:  make([]Order, 0, ORDERBOOK_LEN),
 		SellOrders: make([]Order, 0, ORDERBOOK_LEN),
 	}
-	log.Printf("%v\n", Book)
+	log.Printf("%v\n", book)
 }
 
 // Process an order and return the order matched(if any)
@@ -54,10 +54,10 @@ func Process(order Order) Order {
 
 func processLimitBuy(order Order) Order {
 	//TODO: add processing logic
-	n := len(Book.SellOrders)
+	n := len(book.SellOrders)
 	if n >= 1 {
 		for i := n - 1; i >= 0; i-- {
-			sellOrder := Book.SellOrders[i]
+			sellOrder := book.SellOrders[i]
 			if sellOrder.TokenID == order.TokenID {
 				if sellOrder.Price <= order.Price {
 					fmt.Println("order is matched")
@@ -72,10 +72,10 @@ func processLimitBuy(order Order) Order {
 
 func processLimitSell(order Order) Order {
 	//TODO: add processing logic
-	n := len(Book.BuyOrders)
+	n := len(book.BuyOrders)
 	if n >= 1 {
 		for i := n - 1; i >= 0; i-- {
-			buyOrder := Book.BuyOrders[i]
+			buyOrder := book.BuyOrders[i]
 			if buyOrder.TokenID == order.TokenID {
 				if buyOrder.Price >= order.Price {
 					fmt.Println("order is matched")
@@ -89,9 +89,9 @@ func processLimitSell(order Order) Order {
 }
 
 func addBuyOrder(order Order) {
-	Book.BuyOrders = append(Book.BuyOrders, order)
+	book.BuyOrders = append(book.BuyOrders, order)
 }
 
 func addSellOrder(order Order) {
-	Book.SellOrders = append(Book.SellOrders, order)
+	book.SellOrders = append(book.SellOrders, order)
 }
