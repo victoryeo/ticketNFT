@@ -93,13 +93,19 @@ export default function Marketplace() {
         }
         const res = await fetch("http://localhost:9090/order/", {
           method: 'POST',
-          mode: 'no-cors',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(opts)
         })
         console.log(res)
+        if (res.status >= 200 && res.status <= 299) {
+          const resjson = await (res.json())
+          console.log(resjson)
+        } else {
+          // Handle errors
+          console.log(res.status, res.statusText);
+        }
       } else {
         alert("Order price cannot be higher than 110% of previous sale")
       }
