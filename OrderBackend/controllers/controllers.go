@@ -18,7 +18,6 @@ func CreateOrder(c *gin.Context) {
 		TokenID: input.TokenID, Price: input.Price}
 
 	// TODO: order matching
-	models.Process(order)
-
-	c.JSON(http.StatusOK, gin.H{"data": order})
+	matchOrder := models.Process(order)
+	c.JSON(http.StatusOK, gin.H{"data": matchOrder})
 }
