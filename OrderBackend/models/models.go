@@ -54,6 +54,7 @@ func Process(order Order) Order {
 
 func processLimitBuy(order Order) Order {
 	//TODO: add processing logic
+	fmt.Printf("%v\n", order)
 	n := len(book.SellOrders)
 	if n >= 1 {
 		for i := n - 1; i >= 0; i-- {
