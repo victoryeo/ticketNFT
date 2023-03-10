@@ -44,6 +44,14 @@ func main() {
 	fmt.Print("Order Backend ", "started.\n")
 	models.InitOrder()
 
+	// an golang uint variable cannot go to negative value
+	var ans uint = 0
+	var topNum uint = 5
+	for i := topNum; i >= 1; i-- {
+		ans += i
+	}
+	fmt.Print("ans\n")
+
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*")
 	router.GET("/", getRoot)
