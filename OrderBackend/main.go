@@ -87,8 +87,8 @@ func main() {
 	log.Printf("%v", p)
 	fmt.Println(p.Load())
 
-	// fibanacci
-	fmt.Println("fibanocci", fibonacci(4))
+	// fibonacci
+	fmt.Println("fibonacci", fibonacci(4))
 
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*")
