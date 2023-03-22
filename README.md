@@ -4,9 +4,13 @@ The ReactJS folder contains the web app.
 Please see:
 https://github.com/victoryeo/ticketNFT/blob/master/ReactJS/README.md
 
-The SmartContract contains the smart contract.
+The SmartContract folder contains the smart contract.
 Please see:
 https://github.com/victoryeo/ticketNFT/blob/master/SmartContract/README.md
+
+The OrderBackend folder contains the NFT trading engine.
+Please see:
+https://github.com/victoryeo/ticketNFT/blob/master/OrderBackend/README.md
 
 #### to build the ReactJS webapp docker image, cd to ReactJS folder, and run
 docker login
