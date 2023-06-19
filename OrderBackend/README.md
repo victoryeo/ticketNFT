@@ -18,5 +18,5 @@ go get -d ./...
 go run main.go 
 
 #### to generate go.mod and go.sum
-go mod init github.com/victoryeo/ticketNFT
+go mod init github.com/victoryeo/ticketNFT  
 go mod tidy
