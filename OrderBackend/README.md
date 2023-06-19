@@ -2,15 +2,15 @@
 #### POST("/order")
 ##### Description: send buy/sell order to the backend
 ##### input
-type 
-tokenID
+orderType   
+tokenID  
 price
 ##### return
 Order  
 #### GET("/listOrder")
 ##### Description: get buy/sell order from the backend
 ##### input
-type
+orderType
 ##### return
 array of Order
 
