@@ -1,3 +1,17 @@
+### Rest API endpoint
+POST("/order")
+#### input
+type 
+tokenID
+price
+#### return
+Order
+GET("/listOrder")
+#### input
+type
+#### return
+array of Order
+
 ### get dependencies of the program
 go get -d ./...
 ### to run the application
