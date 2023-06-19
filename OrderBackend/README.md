@@ -1,5 +1,6 @@
 ### Rest API endpoint
 #### POST("/order")
+##### Description: send buy/sell order to the backend
 ##### input
 type 
 tokenID
@@ -7,6 +8,7 @@ price
 ##### return
 Order  
 #### GET("/listOrder")
+##### Description: get buy/sell order from the backend
 ##### input
 type
 ##### return
