@@ -1,16 +1,15 @@
 ### Rest API endpoint
-POST("/order")
-#### input
+##### POST("/order")
+##### input
 type 
 tokenID
 price
-#### return
+##### return
 Order  
-
-GET("/listOrder")
-#### input
+#### GET("/listOrder")
+##### input
 type
-#### return
+##### return
 array of Order
 
 ### get dependencies of the program
