@@ -102,6 +102,7 @@ func main() {
 		MaxAge:           12 * time.Hour,
 	}))
 	router.POST("/order", controllers.CreateOrder)
+	router.GET("/listOrder", controllers.ListOrder)
 
 	router.Run("0.0.0.0:9090")
 }
