@@ -21,3 +21,15 @@ func CreateOrder(c *gin.Context) {
 	matchOrder := models.Process(order)
 	c.JSON(http.StatusOK, gin.H{"data": matchOrder})
 }
+
+// GET /orders
+func ListOrder(c *gin.Context) {
+	var input models.ListOrderInput
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	matchOrder := models.ListOrder(input)
+
+	c.JSON(http.StatusOK, gin.H{"data": matchOrder})
+}
