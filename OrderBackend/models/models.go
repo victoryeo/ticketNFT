@@ -18,6 +18,10 @@ type CreateOrderInput struct {
 	Price   string `json:"price" binding:"required"`
 }
 
+type ListOrderInput struct {
+	Type string `json:"type" binding:"required"`
+}
+
 // OrderBook type
 type OrderBook struct {
 	BuyOrders  []Order
@@ -95,4 +99,14 @@ func addBuyOrder(order Order) {
 
 func addSellOrder(order Order) {
 	book.SellOrders = append(book.SellOrders, order)
+}
+
+func ListOrder(orderType ListOrderInput) []Order {
+	var orderQueue []Order
+	if orderType.Type == "buy" {
+		orderQueue = book.BuyOrders
+	} else {
+		orderQueue = book.SellOrders
+	}
+	return orderQueue
 }
